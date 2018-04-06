@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Sample Admin</title>
+    <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
+    <link href="css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+    <!-- Refrence: http://aehlke.github.io/tag-it/ -->
+    <script type="text/javascript" src="js/vendor/tag-it.min.js"></script>
+
+</head>
+<body>
+    
+    <table class="form-table orkla-form-table" id="customFields">
+        <thead>
+            <th>Keyword(s)</th>
+            <th>Page Link</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr valign="top">
+                <td><input type="text" class="tag-selector" id="tag-sel-1" name="customFieldName[]" value="" placeholder="Input Name" /></td>
+                <td>
+                    <select>
+                        <option>Category Page</option>
+                        <option>Page</option>
+                        <option>Another Page</option>
+                    </select>
+                </td>
+                <td><a href="javascript:void(0);" class="addCF">Add Row</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <script>
+        $(document).ready(function(){
+            var sampleSearches = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua', 'foo','bar'];
+            $('.tag-selector').tagit({
+                availableTags: sampleSearches,
+                allowSpaces: true
+            });
+            $(".orkla-form-table").on('click','.addCF',function(){
+                
+                $('.tag-selector').tagit({
+                    availableTags: sampleSearches,
+                    allowSpaces: true
+                });
+                
+                $(".orkla-form-table tbody").append(`
+                    <tr valign="top">
+                        <td><input type="text" class="tag-selector" id="customFieldName" name="customFieldName[]" value="" placeholder="Input Name" /></td>
+                        <td>
+                            <select>
+                                <option>Category Page</option>
+                                <option>Page</option>
+                                <option>Another Page</option>
+                            </select>
+                        </td>
+                        <td><a href="javascript:void(0);" class="remCF">Remove</a></td>
+                    </tr>
+                `);
+
+            });
+
+
+            $(".orkla-form-table").on('click','.remCF',function(){
+               
+                $(this).parent().parent().remove();
+
+            });
+
+            
+        });
+    </script>
+</body>
+</html>
